@@ -10,8 +10,8 @@
 <body>
     <div class="main">
         <p class="title">Note Taker </p>
-        <img src="notes.png" id="one"></img>
-        <img src="notes.png" id="two"></img>
+        <img src="images/notes.png" id="one"></img>
+        <img src="images/notes.png" id="two"></img>
         <p class="info">Enter a note, then press submit and it will appear below:</p>
         <input type="text" id="words" placeholder="Enter your text here"></input>
         <button type="button" class="submit">Submit</button>
@@ -23,66 +23,7 @@
         </p> -->
     </div>
 
-    <script>
-        const notesContainer = document.querySelector(".notes-container");
-        const btn = document.querySelector(".submit");
-        let note = document.getElementById("words");
-        let notes = document.querySelectorAll(".input-box");
-
-        function showNotes() {
-            notesContainer.innerHTML = localStorage.getItem("notes");
-        }
-        showNotes();
-
-        btn.addEventListener("click", () => {
-            if (note.value === "") {
-                alert("Please enter a note in the text box");
-            }
-            else {
-                let inputBox = document.createElement("p");
-                inputBox.className = "input-box";
-                inputBox.setAttribute("contenteditable", "true");
-                inputBox.textContent = note.value;
-
-                let img = document.createElement("img");
-                img.src = "trash.png";
-                notesContainer.appendChild(inputBox).appendChild(img);
-                note.value = "";
-                updateStorage();
-            }
-        })
-
-        notesContainer.addEventListener("click", function (e) {
-            //remove sticky note if delete is clicked
-            if (e.target.tagName === "IMG") {
-                e.target.parentElement.remove();
-                updateStorage();
-            }
-            else if (e.target.tagName === "P") {
-                console.log(e.target.tagName)
-                notes = document.querySelectorAll(".input-box");
-                notes.forEach(nt => {
-                    nt.onkeyup = function () {
-                        updateStorage();
-                    }
-                }
-                )
-            }
-        })
-
-        // saves notes to local memory
-        function updateStorage() {
-            localStorage.setItem("notes", notesContainer.innerHTML);
-        }
-
-        // line break command
-        document.addEventListener("keydown", event => {
-            if (event.key === "Enter") {
-                document.execCommand("insertLineBreak");
-                event.preventDefault();
-            }
-        })
-    </script>
+    <script src="script.js"></script>
 </body>
 
 </html>
